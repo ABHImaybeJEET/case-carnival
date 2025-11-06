@@ -39,10 +39,18 @@ function useSidebar() {
   return context;
 }
 
-function SidebarProvider({ children }: { children: React.ReactNode }) {
+function SidebarProvider({
+  children,
+  collapsed = false,
+}: {
+  children: React.ReactNode;
+  collapsed?: boolean;
+}) {
   const isMobile = useIsMobile();
   const [isOpen, setIsOpen] = React.useState(!isMobile);
-  const [isCollapsed, setIsCollapsed] = React.useState(isMobile);
+  const [isCollapsed, setIsCollapsed] = React.useState(
+    isMobile ? true : collapsed
+  );
 
   React.useEffect(() => {
     if (isMobile) {
@@ -50,9 +58,9 @@ function SidebarProvider({ children }: { children: React.ReactNode }) {
       setIsCollapsed(true);
     } else {
       setIsOpen(true);
-      setIsCollapsed(false);
+      setIsCollapsed(collapsed);
     }
-  }, [isMobile]);
+  }, [isMobile, collapsed]);
 
   const contextValue = React.useMemo(
     () => ({ isCollapsed, isOpen, isMobile, setIsOpen, setIsCollapsed }),
@@ -61,7 +69,7 @@ function SidebarProvider({ children }: { children: React.ReactNode }) {
 
   return (
     <SidebarContext.Provider value={contextValue}>
-      <div className="flex h-[100dvh] w-full">{children}</div>
+      <div className="flex h-screen w-full">{children}</div>
     </SidebarContext.Provider>
   );
 }
@@ -115,8 +123,8 @@ const SidebarHeader = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        'flex h-16 items-center',
-        isCollapsed ? 'justify-center' : 'justify-between',
+        'flex h-16 shrink-0 items-center',
+        isCollapsed ? 'justify-center' : '',
         className
       )}
       {...props}
@@ -131,7 +139,7 @@ const SidebarContent = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn('flex-1 overflow-y-auto', className)}
+    className={cn('flex flex-1 flex-col overflow-y-auto', className)}
     {...props}
   />
 ));
@@ -148,7 +156,7 @@ const SidebarFooter = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        'relative border-t',
+        'relative mt-auto border-t',
         isCollapsed ? 'p-2' : 'p-4',
         className
       )}
@@ -161,7 +169,7 @@ const SidebarFooter = React.forwardRef<
               <TooltipTrigger asChild>
                 <DropdownMenuTrigger asChild>
                   <Button variant="ghost" size="icon">
-                    <MoreHorizontal />
+                    <MoreHorizontal className="size-5" />
                   </Button>
                 </DropdownMenuTrigger>
               </TooltipTrigger>
@@ -215,9 +223,13 @@ function SidebarMenu({ children }: { children: React.ReactNode }) {
   );
 }
 
-function SidebarMenuItem({ children }: { children: React.ReactNode }) {
-  return <div className="w-full">{children}</div>;
-}
+const SidebarMenuItem = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => {
+  return <div ref={ref} className={cn('w-full', className)} {...props} />;
+});
+SidebarMenuItem.displayName = 'SidebarMenuItem';
 
 const SidebarMenuButton = React.forwardRef<
   HTMLAnchorElement,
@@ -232,8 +244,8 @@ const SidebarMenuButton = React.forwardRef<
     <Button
       variant={isActive ? 'secondary' : 'ghost'}
       className={cn(
-        'w-full',
-        isCollapsed ? 'justify-center' : 'justify-start',
+        'w-full gap-3',
+        isCollapsed ? 'h-12 justify-center p-0' : 'justify-start',
         className
       )}
       asChild
@@ -269,7 +281,7 @@ const SidebarInset = React.forwardRef<
       ref={ref}
       className={cn(
         'flex-1 transition-all duration-300 ease-in-out',
-        !isMobile && (isCollapsed ? 'md:ml-20' : 'md:ml-64'),
+        !isMobile && (isCollapsed ? 'ml-20' : 'ml-64'),
         className
       )}
       {...props}
@@ -289,7 +301,7 @@ function SidebarTrigger({ className }: { className?: string }) {
       onClick={() => setIsOpen((prev) => !prev)}
       className={className}
     >
-      <MoreHorizontal />
+      <MoreHorizontal className="size-5" />
     </Button>
   );
 }

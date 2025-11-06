@@ -20,7 +20,7 @@ import DashboardHeader from '@/components/dashboard/header';
 function DashboardLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   return (
-    <SidebarProvider>
+    <SidebarProvider collapsed>
       <Sidebar>
         <SidebarHeader className="p-4">
           <div className="flex items-center gap-3">
@@ -35,7 +35,7 @@ function DashboardLayout({ children }: { children: React.ReactNode }) {
                 <SidebarMenuButton
                   href={item.href}
                   isActive={pathname === item.href}
-                  tooltip={item.tooltip}
+                  tooltip={item.label}
                 >
                   <item.icon />
                   <span>{item.label}</span>
@@ -44,7 +44,7 @@ function DashboardLayout({ children }: { children: React.ReactNode }) {
             ))}
           </SidebarMenu>
         </SidebarContent>
-        <SidebarFooter className="p-4">
+        <SidebarFooter>
           <div className="flex items-center gap-3">
             <Avatar className="size-8">
               <AvatarImage
@@ -63,10 +63,12 @@ function DashboardLayout({ children }: { children: React.ReactNode }) {
         </SidebarFooter>
       </Sidebar>
       <SidebarInset>
-        <main className="flex flex-1 flex-col overflow-y-auto">
+        <div className="flex h-full flex-col">
           <DashboardHeader />
-          <div className="flex-1 overflow-y-auto p-4 lg:p-6">{children}</div>
-        </main>
+          <main className="flex-1 overflow-y-auto p-4 lg:p-6">
+            {children}
+          </main>
+        </div>
       </SidebarInset>
     </SidebarProvider>
   );

@@ -19,14 +19,14 @@ function ProfilePage() {
               />
               <AvatarFallback>U</AvatarFallback>
             </Avatar>
-            <div className="grid gap-1">
+            <div className="grid gap-1 py-2">
               <CardTitle className="text-2xl">User</CardTitle>
               <p className="text-sm text-muted-foreground">
                 user@swadesigo.com
               </p>
             </div>
           </CardHeader>
-          <CardContent className="flex flex-col gap-2">
+          <CardContent className="grid grid-cols-2 gap-2">
             <Button variant="outline">Edit Profile</Button>
             <Button variant="destructive">Logout</Button>
           </CardContent>

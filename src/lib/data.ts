@@ -3,11 +3,8 @@ import {
   BatteryFull,
   Disc3,
   LayoutDashboard,
-  ShieldAlert,
-  User,
-  Wrench,
-  Bot,
   UserCircle,
+  Wrench,
   Cpu,
   CircuitBoard,
 } from 'lucide-react';
@@ -75,25 +72,22 @@ export const anomalies: Anomaly[] = [
 
 export const navItems: NavItem[] = [
   {
+    href: '/dashboard/profile',
+    label: 'Profile',
+    icon: UserCircle,
+    description: 'Manage your profile and analyze your riding habits.',
+  },
+  {
     href: '/dashboard',
     label: 'Dashboard',
     icon: LayoutDashboard,
-    tooltip: 'Dashboard',
     description: "Here's your vehicle's intelligent overview.",
   },
   {
     href: '/dashboard/maintenance',
     label: 'Maintenance',
     icon: Wrench,
-    tooltip: 'Predictive Maintenance',
     description: 'View the Remaining Useful Life (RUL) of key components.',
-  },
-  {
-    href: '/dashboard/profile',
-    label: 'Profile',
-    icon: UserCircle,
-    tooltip: 'Rider Profile',
-    description: 'Manage your profile and analyze your riding habits.',
   },
 ];
 
