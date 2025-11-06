@@ -5,6 +5,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import AnomalyAlerts from '@/components/dashboard/anomaly-alerts';
+import { Leaf, Mountain } from 'lucide-react';
 
 function ProfilePage() {
   return (
@@ -29,6 +30,40 @@ function ProfilePage() {
           <CardContent className="grid grid-cols-2 gap-2">
             <Button variant="outline">Edit Profile</Button>
             <Button variant="destructive">Logout</Button>
+          </CardContent>
+        </Card>
+        <Card className="mt-6">
+          <CardHeader>
+            <div className="flex items-center gap-2">
+              <Leaf className="size-5" />
+              <CardTitle>Green Impact</CardTitle>
+            </div>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <Mountain className="size-6 text-primary" />
+                <div>
+                  <p className="font-semibold">CO2 Saved</p>
+                  <p className="text-sm text-muted-foreground">
+                    Compared to a petrol vehicle
+                  </p>
+                </div>
+              </div>
+              <p className="text-lg font-bold">128 kg</p>
+            </div>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <Leaf className="size-6 text-primary" />
+                <div>
+                  <p className="font-semibold">Trees Planted</p>
+                  <p className="text-sm text-muted-foreground">
+                    Equivalent environmental impact
+                  </p>
+                </div>
+              </div>
+              <p className="text-lg font-bold">5</p>
+            </div>
           </CardContent>
         </Card>
       </div>
