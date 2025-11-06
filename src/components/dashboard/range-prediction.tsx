@@ -1,9 +1,12 @@
+'use client';
+import { memo } from 'react';
 import Image from 'next/image';
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
+  CardDescription,
 } from '@/components/ui/card';
 import {
   BatteryMedium,
@@ -11,6 +14,7 @@ import {
   TrafficCone,
   Thermometer,
   User,
+  Map,
 } from 'lucide-react';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 
@@ -22,13 +26,17 @@ const rangeFactors = [
   { label: 'Rider Profile', value: 'Eco', icon: User },
 ];
 
-export default function RangePrediction() {
+function RangePrediction() {
   const mapImage = PlaceHolderImages.find((img) => img.id === 'map-background');
 
   return (
     <Card className="relative flex flex-col overflow-hidden">
       <CardHeader>
-        <CardTitle>Dynamic Range Prediction</CardTitle>
+        <div className="flex items-center gap-2">
+          <Map className="size-5" />
+          <CardTitle>Dynamic Range Prediction</CardTitle>
+        </div>
+        <CardDescription>Estimated distance on current charge.</CardDescription>
       </CardHeader>
       <CardContent className="flex flex-1 flex-col items-center justify-center p-0 md:flex-row">
         <div className="relative z-10 flex w-full flex-col items-center justify-center bg-background/50 p-6 text-center backdrop-blur-sm md:w-1/2 md:bg-transparent md:backdrop-blur-none">
@@ -46,7 +54,7 @@ export default function RangePrediction() {
           <div className="grid grid-cols-2 gap-4 text-sm sm:grid-cols-3 md:grid-cols-2">
             {rangeFactors.map((factor) => (
               <div key={factor.label} className="flex items-center gap-2">
-                <factor.icon className="h-5 w-5 text-accent" />
+                <factor.icon className="h-5 w-5 text-primary" />
                 <div>
                   <div className="font-medium">{factor.label}</div>
                   <div className="text-xs text-muted-foreground">
@@ -62,7 +70,7 @@ export default function RangePrediction() {
             src={mapImage.imageUrl}
             alt={mapImage.description}
             fill
-            className="object-cover opacity-10"
+            className="object-cover opacity-5"
             data-ai-hint={mapImage.imageHint}
           />
         )}
@@ -70,3 +78,5 @@ export default function RangePrediction() {
     </Card>
   );
 }
+
+export default memo(RangePrediction);

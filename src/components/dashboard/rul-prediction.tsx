@@ -1,14 +1,17 @@
+'use client';
+import { memo } from 'react';
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
-  CardDescription
+  CardDescription,
 } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { vehicleComponents } from '@/lib/data';
+import { Wrench } from 'lucide-react';
 
-export default function RulPrediction() {
+function RulPrediction() {
   const getProgressColor = (value: number) => {
     if (value < 25) return 'bg-destructive';
     if (value < 50) return 'bg-yellow-500';
@@ -18,18 +21,21 @@ export default function RulPrediction() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Predictive Maintenance</CardTitle>
-        <CardDescription>Remaining Useful Life (RUL)</CardDescription>
+        <div className="flex items-center gap-2">
+          <Wrench className="size-5" />
+          <CardTitle>Predictive Maintenance</CardTitle>
+        </div>
+        <CardDescription>Remaining Useful Life (RUL) of key components.</CardDescription>
       </CardHeader>
       <CardContent className="space-y-6">
         {vehicleComponents.map((component) => (
           <div key={component.name}>
-            <div className="mb-2 flex items-center justify-between">
+            <div className="mb-2 flex items-center justify-between text-sm">
               <div className="flex items-center gap-2">
                 <component.icon className="h-5 w-5 text-muted-foreground" />
                 <span className="font-medium">{component.name}</span>
               </div>
-              <span className="text-sm font-semibold">{component.rul}%</span>
+              <span className="font-semibold">{component.rul}%</span>
             </div>
             <Progress
               value={component.rul}
@@ -41,3 +47,5 @@ export default function RulPrediction() {
     </Card>
   );
 }
+
+export default memo(RulPrediction);

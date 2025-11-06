@@ -7,6 +7,7 @@ import {
   User,
   Wrench,
   Bot,
+  UserCircle,
 } from 'lucide-react';
 import { TireIcon } from '@/components/icons/tire';
 
@@ -62,33 +63,25 @@ export const anomalies: Anomaly[] = [
 
 export const navItems: NavItem[] = [
   {
-    href: '/dashboard/profile',
-    label: 'Profile',
-    icon: User,
-    tooltip: 'Rider Profile',
-  },
-  {
     href: '/dashboard',
     label: 'Dashboard',
     icon: LayoutDashboard,
     tooltip: 'Dashboard',
+    description: "Here's your vehicle's intelligent overview.",
   },
   {
-    href: '#',
-    label: 'Maintenance',
-    icon: Wrench,
-    tooltip: 'Maintenance',
-  },
-  {
-    href: '#',
-    label: 'Alerts',
-    icon: ShieldAlert,
-    tooltip: 'Alerts',
+    href: '/dashboard/profile',
+    label: 'Profile',
+    icon: UserCircle,
+    tooltip: 'Rider Profile',
+    description: 'Manage your profile and analyze your riding habits.',
   },
 ];
 
-export const historicalSpeedData = [60, 62, 65, 58, 70, 75, 72, 68, 65, 63].join(', ');
-export const historicalAccelerationData = [2.5, 3.0, 2.8, 2.2, 3.5, 3.8, 3.1, 2.9, 2.6, 2.4].join(', ');
+export const historicalSpeedData =
+  [60, 62, 65, 58, 70, 75, 72, 68, 65, 63].join(', ');
+export const historicalAccelerationData =
+  [2.5, 3.0, 2.8, 2.2, 3.5, 3.8, 3.1, 2.9, 2.6, 2.4].join(', ');
 export const maintenanceHistory = `
 - 2024-06-15: Regular check-up. All systems normal. Tire pressure adjusted.
 - 2024-03-10: Replaced front brake pads. Fluid levels checked.

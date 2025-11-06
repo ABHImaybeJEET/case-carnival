@@ -1,12 +1,11 @@
 'use client';
-import React from 'react';
+import React, { memo } from 'react';
 import { usePathname } from 'next/navigation';
 import {
   SidebarProvider,
   Sidebar,
   SidebarHeader,
   SidebarContent,
-  SidebarInset,
   SidebarMenu,
   SidebarMenuItem,
   SidebarMenuButton,
@@ -17,11 +16,7 @@ import { navItems } from '@/lib/data';
 import { Logo } from '@/components/icons/logo';
 import DashboardHeader from '@/components/dashboard/header';
 
-export default function DashboardLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+function DashboardLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   return (
     <SidebarProvider>
@@ -51,7 +46,10 @@ export default function DashboardLayout({
         <SidebarFooter className="p-4">
           <div className="flex items-center gap-3">
             <Avatar className="size-8">
-              <AvatarImage src="https://picsum.photos/seed/user/40/40" data-ai-hint="profile person" />
+              <AvatarImage
+                src="https://picsum.photos/seed/user/40/40"
+                data-ai-hint="profile person"
+              />
               <AvatarFallback>U</AvatarFallback>
             </Avatar>
             <div className="flex flex-col">
@@ -63,12 +61,12 @@ export default function DashboardLayout({
           </div>
         </SidebarFooter>
       </Sidebar>
-      <SidebarInset className="flex flex-col">
+      <main className="flex flex-1 flex-col overflow-y-auto">
         <DashboardHeader />
-        <main className="flex-1 overflow-y-auto p-4 lg:p-6">
-          {children}
-        </main>
-      </SidebarInset>
+        <div className="flex-1 overflow-y-auto p-4 lg:p-6">{children}</div>
+      </main>
     </SidebarProvider>
   );
 }
+
+export default memo(DashboardLayout);

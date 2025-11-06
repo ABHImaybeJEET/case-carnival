@@ -21,4 +21,5 @@ export type NavItem = {
   label: string;
   icon: LucideIcon;
   tooltip: string;
+  description?: string;
 };

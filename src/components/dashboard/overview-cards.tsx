@@ -1,17 +1,20 @@
+'use client';
+import { memo } from 'react';
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { Gauge, Zap, Map, Thermometer } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Power, Gauge, Zap, Map, Thermometer } from 'lucide-react';
 
 const overviewData = [
   {
-    title: 'Current Speed',
-    value: '58',
-    unit: 'km/h',
-    icon: Gauge,
+    title: 'Status',
+    value: 'Parked',
+    unit: 'Vehicle not in use',
+    icon: Power,
   },
   {
     title: 'Battery SoC',
@@ -33,7 +36,7 @@ const overviewData = [
   },
 ];
 
-export default function OverviewCards() {
+function OverviewCards() {
   return (
     <>
       {overviewData.map((item) => (
@@ -43,11 +46,22 @@ export default function OverviewCards() {
             <item.icon className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{item.value}</div>
-            <p className="text-xs text-muted-foreground">{item.unit}</p>
+            {item.title === 'Status' ? (
+              <>
+                <div className="text-2xl font-bold">{item.value}</div>
+                <p className="text-xs text-muted-foreground">{item.unit}</p>
+              </>
+            ) : (
+              <>
+                <div className="text-2xl font-bold">{item.value}</div>
+                <p className="text-xs text-muted-foreground">{item.unit}</p>
+              </>
+            )}
           </CardContent>
         </Card>
       ))}
     </>
   );
 }
+
+export default memo(OverviewCards);
