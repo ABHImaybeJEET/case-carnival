@@ -1,3 +1,10 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "map-background",
+      "description": "A stylized map showing a city grid for range prediction background.",
+      "imageUrl": "https://images.unsplash.com/photo-1717343824033-7ef910960232?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8bWFwJTIwY2l0eXxlbnwwfHx8fDE3NjIzNTY0NjF8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "map city"
+    }
+  ]
 }
