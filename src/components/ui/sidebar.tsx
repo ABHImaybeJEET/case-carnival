@@ -51,6 +51,11 @@ function SidebarProvider({
   const [isCollapsed, setIsCollapsed] = React.useState(
     isMobile ? true : collapsed
   );
+  const [isMounted, setIsMounted] = React.useState(false);
+
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   React.useEffect(() => {
     if (isMobile) {
@@ -66,6 +71,10 @@ function SidebarProvider({
     () => ({ isCollapsed, isOpen, isMobile, setIsOpen, setIsCollapsed }),
     [isCollapsed, isOpen, isMobile, setIsOpen, setIsCollapsed]
   );
+
+  if (!isMounted) {
+    return null;
+  }
 
   return (
     <SidebarContext.Provider value={contextValue}>
