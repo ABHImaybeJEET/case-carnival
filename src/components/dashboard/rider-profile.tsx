@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useTransition, memo, useEffect } from 'react';
+import { useState, useTransition, memo, useEffect, useMemo } from 'react';
 import {
   Card,
   CardContent,
@@ -44,6 +44,12 @@ function RiderProfile() {
   useEffect(() => {
     handleAnalyze();
   }, []);
+  
+  const formattedSuggestions = useMemo(() => {
+    if (!analysis?.suggestions) return '';
+    // Remove markdown characters like ** and list markers like * or -
+    return analysis.suggestions.replace(/(\*\*|[\*\-]\s)/g, '');
+  }, [analysis]);
 
   return (
     <Card className="flex h-full flex-col">
@@ -77,7 +83,7 @@ function RiderProfile() {
                   <h4 className="font-semibold">Suggestions for You</h4>
                 </div>
                 <p className="whitespace-pre-line text-muted-foreground">
-                  {analysis.suggestions}
+                  {formattedSuggestions}
                 </p>
               </div>
             )}
