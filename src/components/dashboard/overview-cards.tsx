@@ -6,8 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Power, Gauge, Zap, Map, Thermometer } from 'lucide-react';
+import { Power, Zap, Map, Thermometer } from 'lucide-react';
 
 const overviewData = [
   {
@@ -46,17 +45,8 @@ function OverviewCards() {
             <item.icon className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            {item.title === 'Status' ? (
-              <>
-                <div className="text-2xl font-bold">{item.value}</div>
-                <p className="text-xs text-muted-foreground">{item.unit}</p>
-              </>
-            ) : (
-              <>
-                <div className="text-2xl font-bold">{item.value}</div>
-                <p className="text-xs text-muted-foreground">{item.unit}</p>
-              </>
-            )}
+            <div className="text-2xl font-bold">{item.value}</div>
+            <p className="text-xs text-muted-foreground">{item.unit}</p>
           </CardContent>
         </Card>
       ))}

@@ -72,7 +72,7 @@ function SidebarItems() {
 
 function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
-    <SidebarProvider collapsed>
+    <SidebarProvider>
       <Sidebar>
         <SidebarItems />
       </Sidebar>
