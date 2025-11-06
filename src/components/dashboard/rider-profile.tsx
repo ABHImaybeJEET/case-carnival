@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useTransition, memo } from 'react';
+import { useState, useTransition, memo, useEffect } from 'react';
 import {
   Card,
   CardContent,
@@ -39,6 +39,10 @@ function RiderProfile() {
     });
   };
 
+  useEffect(() => {
+    handleAnalyze();
+  }, []);
+
   return (
     <Card className="flex h-full flex-col">
       <CardHeader>
@@ -55,32 +59,16 @@ function RiderProfile() {
           <div className="flex h-full items-center justify-center">
             <Loader2 className="h-8 w-8 animate-spin text-primary" />
           </div>
-        ) : summary ? (
+        ) : (
           <div className="flex flex-col gap-4 text-sm">
             <div className="flex items-start gap-3">
               <Bot className="h-5 w-5 flex-shrink-0 text-primary" />
               <p className="text-muted-foreground">{summary}</p>
             </div>
           </div>
-        ) : (
-          <div className="flex h-full flex-col items-center justify-center rounded-lg border-2 border-dashed border-muted bg-muted/20 p-8 text-center text-sm text-muted-foreground">
-            <BarChart3 className="mb-2 h-8 w-8" />
-            <p className="mb-4">
-              Get personalized insights on your riding style by analyzing your
-              recent trip data.
-            </p>
-            <Button
-              onClick={handleAnalyze}
-              disabled={isPending}
-              variant="outline"
-            >
-              <Bot className="mr-2 h-4 w-4" />
-              Analyze My Riding Style
-            </Button>
-          </div>
         )}
       </CardContent>
-      {summary && (
+      {summary && !isPending && (
         <CardFooter>
           <Button onClick={handleAnalyze} disabled={isPending} className="w-full">
             {isPending ? (

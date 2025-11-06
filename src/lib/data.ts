@@ -8,6 +8,8 @@ import {
   Wrench,
   Bot,
   UserCircle,
+  Cpu,
+  CircuitBoard,
 } from 'lucide-react';
 import { TireIcon } from '@/components/icons/tire';
 
@@ -16,6 +18,16 @@ export const vehicleComponents: VehicleComponent[] = [
     name: 'Battery Health',
     rul: 82,
     icon: BatteryFull,
+  },
+  {
+    name: 'Motor',
+    rul: 95,
+    icon: Cpu,
+  },
+  {
+    name: 'Controller',
+    rul: 92,
+    icon: CircuitBoard,
   },
   {
     name: 'Brake Pads',

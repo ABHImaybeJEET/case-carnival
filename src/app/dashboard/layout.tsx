@@ -25,7 +25,7 @@ function DashboardLayout({ children }: { children: React.ReactNode }) {
         <SidebarHeader className="p-4">
           <div className="flex items-center gap-3">
             <Logo className="size-8 text-primary" />
-            <span className="text-xl font-semibold">eRideWise</span>
+            <span className="text-xl font-semibold">Swadesi Go</span>
           </div>
         </SidebarHeader>
         <SidebarContent>

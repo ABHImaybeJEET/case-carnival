@@ -7,7 +7,7 @@ import { cn } from '@/lib/utils';
 const inter = Inter({ subsets: ['latin'], variable: '--font-body' });
 
 export const metadata: Metadata = {
-  title: 'eRideWise',
+  title: 'Swadesi Go',
   description: 'Intelligent EV Management Platform',
 };
 
