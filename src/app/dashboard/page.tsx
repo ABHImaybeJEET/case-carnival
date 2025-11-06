@@ -4,7 +4,6 @@ import { memo } from 'react';
 import OverviewCards from '@/components/dashboard/overview-cards';
 import RangePrediction from '@/components/dashboard/range-prediction';
 import AnomalyAlerts from '@/components/dashboard/anomaly-alerts';
-import RiderProfile from '@/components/dashboard/rider-profile';
 
 function DashboardPage() {
   return (
@@ -18,10 +17,6 @@ function DashboardPage() {
       </div>
 
       <div className="col-span-1 flex flex-col gap-6 lg:col-span-2">
-        <RiderProfile />
-      </div>
-
-      <div className="col-span-1 flex flex-col gap-6 lg:col-span-4">
         <AnomalyAlerts />
       </div>
     </div>
