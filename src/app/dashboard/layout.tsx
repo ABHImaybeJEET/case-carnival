@@ -11,56 +11,70 @@ import {
   SidebarMenuButton,
   SidebarFooter,
   SidebarInset,
+  useSidebar,
 } from '@/components/ui/sidebar';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { navItems } from '@/lib/data';
 import { Logo } from '@/components/icons/logo';
 import DashboardHeader from '@/components/dashboard/header';
 
-function DashboardLayout({ children }: { children: React.ReactNode }) {
+function SidebarItems() {
   const pathname = usePathname();
+  const { isCollapsed } = useSidebar();
   return (
-    <SidebarProvider>
-      <Sidebar>
-        <SidebarHeader className="p-4">
-          <div className="flex items-center gap-3">
-            <Logo className="size-8 text-primary" />
+    <>
+      <SidebarHeader className="p-4">
+        <div className="flex items-center gap-3">
+          <Logo className="size-8 text-primary" />
+          {!isCollapsed && (
             <span className="text-xl font-semibold">Swadesi Go</span>
-          </div>
-        </SidebarHeader>
-        <SidebarContent>
-          <SidebarMenu>
-            {navItems.map((item) => (
-              <SidebarMenuItem key={item.label}>
-                <SidebarMenuButton
-                  href={item.href}
-                  isActive={pathname === item.href}
-                  tooltip={item.label}
-                >
-                  <item.icon />
-                  <span>{item.label}</span>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-            ))}
-          </SidebarMenu>
-        </SidebarContent>
-        <SidebarFooter>
-          <div className="flex items-center gap-3">
-            <Avatar className="size-8">
-              <AvatarImage
-                src="https://picsum.photos/seed/user/40/40"
-                data-ai-hint="profile person"
-              />
-              <AvatarFallback>U</AvatarFallback>
-            </Avatar>
+          )}
+        </div>
+      </SidebarHeader>
+      <SidebarContent>
+        <SidebarMenu>
+          {navItems.map((item) => (
+            <SidebarMenuItem key={item.label}>
+              <SidebarMenuButton
+                href={item.href}
+                isActive={pathname === item.href}
+                tooltip={item.label}
+              >
+                <item.icon />
+                {!isCollapsed && <span>{item.label}</span>}
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          ))}
+        </SidebarMenu>
+      </SidebarContent>
+      <SidebarFooter>
+        <div className="flex items-center gap-3">
+          <Avatar className="size-8">
+            <AvatarImage
+              src="https://picsum.photos/seed/user/40/40"
+              data-ai-hint="profile person"
+            />
+            <AvatarFallback>U</AvatarFallback>
+          </Avatar>
+          {!isCollapsed && (
             <div className="flex flex-col">
               <span className="text-sm font-medium">User</span>
               <span className="text-xs text-muted-foreground">
                 user@swadesigo.com
               </span>
             </div>
-          </div>
-        </SidebarFooter>
+          )}
+        </div>
+      </SidebarFooter>
+    </>
+  );
+}
+
+function DashboardLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <SidebarProvider collapsed>
+      <Sidebar>
+        <SidebarItems />
       </Sidebar>
       <SidebarInset>
         <div className="flex h-full flex-col">

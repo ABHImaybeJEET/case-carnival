@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { ChevronLeft, ChevronRight, MoreHorizontal } from 'lucide-react';
-import { Button, type ButtonProps } from '@/components/ui/button';
+import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -165,44 +165,51 @@ const SidebarFooter = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        'relative mt-auto border-t',
+        'relative mt-auto flex items-center justify-center border-t',
         isCollapsed ? 'p-2' : 'p-4',
         className
       )}
       {...props}
     >
-      {isCollapsed && !isMobile ? (
-        <DropdownMenu open={isMenuOpen} onOpenChange={setIsMenuOpen}>
-          <TooltipProvider delayDuration={0}>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="icon">
-                    <MoreHorizontal className="size-5" />
-                  </Button>
-                </DropdownMenuTrigger>
-              </TooltipTrigger>
-              <TooltipContent side="right" align="center">
-                User Menu
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
-          <DropdownMenuContent
-            side="right"
-            align="end"
-            className="w-56"
-            onCloseAutoFocus={(e) => {
-              if (isMenuOpen) {
-                e.preventDefault();
-              }
-            }}
-          >
-            <div className="p-2">{children}</div>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      ) : (
-        children
-      )}
+      <div
+        className={cn(
+          'w-full',
+          isCollapsed && !isMobile ? 'flex justify-center' : ''
+        )}
+      >
+        {isCollapsed && !isMobile ? (
+          <DropdownMenu open={isMenuOpen} onOpenChange={setIsMenuOpen}>
+            <TooltipProvider delayDuration={0}>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="ghost" size="icon">
+                      <MoreHorizontal className="size-5" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                </TooltipTrigger>
+                <TooltipContent side="right" align="center">
+                  User Menu
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+            <DropdownMenuContent
+              side="right"
+              align="end"
+              className="w-56"
+              onCloseAutoFocus={(e) => {
+                if (isMenuOpen) {
+                  e.preventDefault();
+                }
+              }}
+            >
+              <div className="p-2">{children}</div>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        ) : (
+          children
+        )}
+      </div>
       {!isMobile && (
         <Button
           variant="ghost"
