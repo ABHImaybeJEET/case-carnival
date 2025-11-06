@@ -20,7 +20,7 @@ import DashboardHeader from '@/components/dashboard/header';
 function DashboardLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   return (
-    <SidebarProvider collapsed>
+    <SidebarProvider>
       <Sidebar>
         <SidebarHeader className="p-4">
           <div className="flex items-center gap-3">
