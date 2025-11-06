@@ -30,17 +30,22 @@ function RulPrediction() {
       <CardContent className="space-y-6">
         {vehicleComponents.map((component) => (
           <div key={component.name}>
-            <div className="mb-2 flex items-center justify-between text-sm">
+            <div className="mb-1 flex items-center justify-between text-sm">
               <div className="flex items-center gap-2">
                 <component.icon className="h-5 w-5 text-muted-foreground" />
                 <span className="font-medium">{component.name}</span>
               </div>
               <span className="font-semibold">{component.rul}%</span>
             </div>
-            <Progress
+             <Progress
               value={component.rul}
               indicatorClassName={getProgressColor(component.rul)}
             />
+            {component.replacementSuggestion && (
+              <p className="mt-2 text-xs text-muted-foreground">
+                {component.replacementSuggestion}
+              </p>
+            )}
           </div>
         ))}
       </CardContent>

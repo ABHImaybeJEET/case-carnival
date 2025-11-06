@@ -15,31 +15,37 @@ export const vehicleComponents: VehicleComponent[] = [
     name: 'Battery Health',
     rul: 82,
     icon: BatteryFull,
+    replacementSuggestion: 'Expected to last another 2 years under normal use.',
   },
   {
     name: 'Motor',
     rul: 95,
     icon: Cpu,
+    replacementSuggestion: 'Motor is in excellent condition. No replacement needed soon.',
   },
   {
     name: 'Controller',
     rul: 92,
     icon: CircuitBoard,
+    replacementSuggestion: 'Controller is functioning optimally.',
   },
   {
     name: 'Brake Pads',
     rul: 45,
     icon: Disc3,
+    replacementSuggestion: 'Consider replacement in the next 4-6 months.',
   },
   {
     name: 'Front Tire',
     rul: 68,
     icon: TireIcon,
+    replacementSuggestion: 'Tread depth is good. Check again in 8-10 months.',
   },
   {
     name: 'Rear Tire',
     rul: 75,
     icon: TireIcon,
+    replacementSuggestion: 'Tread depth is excellent. Check again in 12 months.',
   },
 ];
 

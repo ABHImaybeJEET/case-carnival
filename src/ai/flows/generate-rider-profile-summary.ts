@@ -32,6 +32,11 @@ const GenerateRiderProfileSummaryOutputSchema = z.object({
     .describe(
       'A summary of the rider profile, characterizing their driving habits (e.g., aggressive vs. economical) and potential impact on range and maintenance.'
     ),
+  suggestions: z
+    .string()
+    .describe(
+      'Actionable suggestions for the rider to improve driving efficiency, extend range, and optimize battery health based on their profile.'
+    ),
 });
 export type GenerateRiderProfileSummaryOutput = z.infer<
   typeof GenerateRiderProfileSummaryOutputSchema
@@ -48,13 +53,15 @@ const prompt = ai.definePrompt({
   input: {schema: GenerateRiderProfileSummaryInputSchema},
   output: {schema: GenerateRiderProfileSummaryOutputSchema},
   prompt: `You are an AI assistant specializing in analyzing rider behavior for electric vehicles.
-  You are given the rider's historical speed and acceleration data. Your task is to generate a concise summary of their rider profile, 
+  You are given the rider's historical speed and acceleration data. Your task is to generate a concise summary of their rider profile,
   characterizing their driving habits (e.g., aggressive vs. economical) and the potential impact of these habits on the vehicle's range and maintenance needs.
+
+  Also, provide a few actionable suggestions to help the rider improve their driving efficiency, extend range, and optimize battery health.
 
   Historical Speed Data: {{{historicalSpeedData}}}
   Historical Acceleration Data: {{{historicalAccelerationData}}}
 
-  Based on this data, provide a summary of the rider's driving style and its potential effects.
+  Based on this data, provide a rider profile summary and suggestions.
   `,
 });
 

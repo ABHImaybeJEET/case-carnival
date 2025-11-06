@@ -5,6 +5,7 @@ export type VehicleComponent = {
   name: string;
   rul: number; // Remaining Useful Life in percentage
   icon: LucideIcon | ((props: SVGProps<SVGSVGElement>) => JSX.Element);
+  replacementSuggestion?: string;
 };
 
 export type Anomaly = {
