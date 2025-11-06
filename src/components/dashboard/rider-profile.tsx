@@ -10,14 +10,15 @@ import {
   CardFooter,
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Bot, Loader2, BarChart3, UserCircle, Lightbulb } from 'lucide-react';
+import { Bot, Loader2, Lightbulb, UserCircle } from 'lucide-react';
 import { generateRiderProfileSummary } from '@/ai/flows/generate-rider-profile-summary';
 import { historicalSpeedData, historicalAccelerationData } from '@/lib/data';
 import { useToast } from '@/hooks/use-toast';
 import type { GenerateRiderProfileSummaryOutput } from '@/ai/flows/generate-rider-profile-summary';
 
 function RiderProfile() {
-  const [analysis, setAnalysis] = useState<GenerateRiderProfileSummaryOutput | null>(null);
+  const [analysis, setAnalysis] =
+    useState<GenerateRiderProfileSummaryOutput | null>(null);
   const [isPending, startTransition] = useTransition();
   const { toast } = useToast();
 
@@ -52,7 +53,8 @@ function RiderProfile() {
           <CardTitle>Rider Profile Analysis</CardTitle>
         </div>
         <CardDescription>
-          AI-powered analysis of your driving habits and personalized suggestions.
+          AI-powered analysis of your driving habits and personalized
+          suggestions.
         </CardDescription>
       </CardHeader>
       <CardContent className="flex-1">
@@ -64,15 +66,19 @@ function RiderProfile() {
           <div className="space-y-6 text-sm">
             <div className="flex items-start gap-3">
               <Bot className="h-5 w-5 flex-shrink-0 text-primary" />
-              <p className="text-muted-foreground">{analysis.riderProfileSummary}</p>
+              <p className="text-muted-foreground">
+                {analysis.riderProfileSummary}
+              </p>
             </div>
-             {analysis.suggestions && (
+            {analysis.suggestions && (
               <div>
-                <div className='flex items-center gap-3 mb-3'>
+                <div className="mb-3 flex items-center gap-3">
                   <Lightbulb className="h-5 w-5 flex-shrink-0 text-primary" />
                   <h4 className="font-semibold">Suggestions for You</h4>
                 </div>
-                <p className="text-muted-foreground whitespace-pre-line">{analysis.suggestions}</p>
+                <p className="whitespace-pre-line text-muted-foreground">
+                  {analysis.suggestions}
+                </p>
               </div>
             )}
           </div>
@@ -80,7 +86,11 @@ function RiderProfile() {
       </CardContent>
       {analysis && !isPending && (
         <CardFooter>
-          <Button onClick={handleAnalyze} disabled={isPending} className="w-full">
+          <Button
+            onClick={handleAnalyze}
+            disabled={isPending}
+            className="w-full"
+          >
             {isPending ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />

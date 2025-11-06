@@ -30,12 +30,12 @@ const GenerateRiderProfileSummaryOutputSchema = z.object({
   riderProfileSummary: z
     .string()
     .describe(
-      'A summary of the rider profile, characterizing their driving habits (e.g., aggressive vs. economical) and potential impact on range and maintenance.'
+      'A detailed yet easy-to-understand summary of the rider profile. Characterize their driving style (e.g., Aggressive, Balanced, Economical) and explain how this impacts the vehicle\'s range, battery health, and component wear.'
     ),
   suggestions: z
     .string()
     .describe(
-      'Actionable suggestions for the rider to improve driving efficiency, extend range, and optimize battery health based on their profile.'
+      'Provide a bulleted list of 3-4 clear, actionable suggestions for the rider to improve driving efficiency. Include tips on smoother acceleration, optimal cruising speed, and smart charging habits to extend range and optimize battery longevity.'
     ),
 });
 export type GenerateRiderProfileSummaryOutput = z.infer<
@@ -52,16 +52,31 @@ const prompt = ai.definePrompt({
   name: 'generateRiderProfileSummaryPrompt',
   input: {schema: GenerateRiderProfileSummaryInputSchema},
   output: {schema: GenerateRiderProfileSummaryOutputSchema},
-  prompt: `You are an AI assistant specializing in analyzing rider behavior for electric vehicles.
-  You are given the rider's historical speed and acceleration data. Your task is to generate a concise summary of their rider profile,
-  characterizing their driving habits (e.g., aggressive vs. economical) and the potential impact of these habits on the vehicle's range and maintenance needs.
+  prompt: `You are an AI-powered driving coach for an electric vehicle platform called Swadesi Go.
+  Your tone should be encouraging, insightful, and helpful.
 
-  Also, provide a few actionable suggestions to help the rider improve their driving efficiency, extend range, and optimize battery health.
+  Analyze the provided historical speed and acceleration data to create a comprehensive rider profile.
 
-  Historical Speed Data: {{{historicalSpeedData}}}
-  Historical Acceleration Data: {{{historicalAccelerationData}}}
+  **Data to Analyze:**
+  - Historical Speed Data (km/h): {{{historicalSpeedData}}}
+  - Historical Acceleration Data (m/s²): {{{historicalAccelerationData}}}
 
-  Based on this data, provide a rider profile summary and suggestions.
+  **Your Tasks:**
+
+  1.  **Rider Profile Summary:**
+      - Start by categorizing the rider's style (e.g., "Economical Cruiser," "Spirited Rider," "Aggressive Accelerator").
+      - Provide a concise paragraph explaining what the data reveals about their habits. For example, do they accelerate sharply? Do they maintain steady speeds?
+      - Explain the real-world impact of this driving style on the vehicle's battery range, long-term battery health, and maintenance needs (like brake and tire wear).
+
+  2.  **Actionable Suggestions:**
+      - Generate a bulleted list of 3-4 practical and easy-to-follow tips.
+      - Suggestions should be directly related to the analyzed data.
+      - Examples of suggestions could include:
+        - "Try to keep your acceleration values below 3.0 m/s² for a smoother, more efficient ride."
+        - "Maintaining a steady speed around 60-65 km/h, when possible, will maximize your range."
+        - "For optimal battery health, consider charging to 80% for daily use and only to 100% for long trips."
+
+  Your response should be structured to directly feed into the defined output schema.
   `,
 });
 
