@@ -10,6 +10,7 @@ import {
   SidebarMenuItem,
   SidebarMenuButton,
   SidebarFooter,
+  SidebarInset,
 } from '@/components/ui/sidebar';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { navItems } from '@/lib/data';
@@ -61,10 +62,12 @@ function DashboardLayout({ children }: { children: React.ReactNode }) {
           </div>
         </SidebarFooter>
       </Sidebar>
-      <main className="flex flex-1 flex-col overflow-y-auto">
-        <DashboardHeader />
-        <div className="flex-1 overflow-y-auto p-4 lg:p-6">{children}</div>
-      </main>
+      <SidebarInset>
+        <main className="flex flex-1 flex-col overflow-y-auto">
+          <DashboardHeader />
+          <div className="flex-1 overflow-y-auto p-4 lg:p-6">{children}</div>
+        </main>
+      </SidebarInset>
     </SidebarProvider>
   );
 }

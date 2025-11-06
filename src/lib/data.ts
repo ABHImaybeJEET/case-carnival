@@ -70,6 +70,13 @@ export const navItems: NavItem[] = [
     description: "Here's your vehicle's intelligent overview.",
   },
   {
+    href: '/dashboard/maintenance',
+    label: 'Maintenance',
+    icon: Wrench,
+    tooltip: 'Predictive Maintenance',
+    description: 'View the Remaining Useful Life (RUL) of key components.',
+  },
+  {
     href: '/dashboard/profile',
     label: 'Profile',
     icon: UserCircle,
