@@ -30,6 +30,14 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  webpack: (config, {isServer, dev}) => {
+    if (!dev && isServer) {
+      config.externals.push({
+        '@/ai/dev': 'var {}',
+      });
+    }
+    return config;
+  },
 };
 
 export default nextConfig;
