@@ -1,4 +1,6 @@
+'use client';
 import React from 'react';
+import { usePathname } from 'next/navigation';
 import {
   SidebarProvider,
   Sidebar,
@@ -20,6 +22,7 @@ export default function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const pathname = usePathname();
   return (
     <SidebarProvider>
       <Sidebar>
@@ -35,7 +38,7 @@ export default function DashboardLayout({
               <SidebarMenuItem key={item.label}>
                 <SidebarMenuButton
                   href={item.href}
-                  isActive={item.href === '/dashboard'}
+                  isActive={pathname === item.href}
                   tooltip={item.tooltip}
                 >
                   <item.icon />

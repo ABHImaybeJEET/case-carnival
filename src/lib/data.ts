@@ -62,6 +62,12 @@ export const anomalies: Anomaly[] = [
 
 export const navItems: NavItem[] = [
   {
+    href: '/dashboard/profile',
+    label: 'Profile',
+    icon: User,
+    tooltip: 'Rider Profile',
+  },
+  {
     href: '/dashboard',
     label: 'Dashboard',
     icon: LayoutDashboard,
@@ -78,12 +84,6 @@ export const navItems: NavItem[] = [
     label: 'Alerts',
     icon: ShieldAlert,
     tooltip: 'Alerts',
-  },
-  {
-    href: '#',
-    label: 'Profile',
-    icon: User,
-    tooltip: 'Rider Profile',
   },
 ];
 
